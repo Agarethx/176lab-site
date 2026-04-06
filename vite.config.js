@@ -11,5 +11,9 @@ export default defineConfig({
   },
   server: {
     open: true,
+    watch: {
+      // Vite ignores publicDir by default — force-watch it
+      ignored: ['!**/public/**'],
+    },
   },
 })
