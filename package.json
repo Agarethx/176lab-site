@@ -1,0 +1,21 @@
+{
+  "name": "animated-sites-starter",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^8.0.1"
+  },
+  "dependencies": {
+    "@studio-freight/lenis": "^1.0.42",
+    "@tailwindcss/vite": "^4.2.2",
+    "gsap": "^3.14.2",
+    "tailwindcss": "^4.2.2",
+    "three": "^0.183.2"
+  }
+}

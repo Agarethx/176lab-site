@@ -1,0 +1,875 @@
+<style>
+/* ── Variables ─────────────────────────────────────────── */
+:root {
+    --primary-cyan: #00D4B8;
+    --primary-yellow: #D4ED30;
+    --primary-blue: #4A90E2;
+    --hero-bg: #00EBB2;
+    --collab-bg: #00EBB2;
+    --blue-service: #2C91F0;
+    --text-dark: #2D3748;
+    --text-light: #718096;
+    --white: #FFFFFF;
+    --gradient-bg: linear-gradient(135deg, var(--primary-cyan) 0%, var(--primary-blue) 100%);
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --spacing-2xl: 4rem;
+    --spacing-3xl: 5rem;
+    --spacing-4xl: 6rem;
+    --font-family-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-size-sm: 0.8rem;
+    --font-size-base: 0.9rem;
+    --font-size-md: 0.95rem;
+    --font-size-lg: 1.1rem;
+    --font-size-xl: 1.2rem;
+    --font-size-2xl: 1.5rem;
+    --font-weight-light: 200;
+    --font-weight-normal: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-black: 900;
+    --border-radius-sm: 8px;
+    --border-radius-md: 12px;
+    --border-radius-lg: 16px;
+    --border-radius-pill: 50px;
+    --box-shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.1);
+    --box-shadow-md: 0 4px 20px rgba(212, 237, 48, 0.3);
+    --box-shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.1);
+    --box-shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.2);
+    --box-shadow-cyan: 0 4px 20px rgba(0, 212, 184, 0.3);
+    --transition-fast: all 0.3s ease;
+    --transition-medium: all 0.6s ease;
+    --transition-slow: all 0.9s ease-in-out;
+    --text-shadow-glow: 0 0 4px #dcf44a, 0 0 8px #60f9f0, 0 5px 2px #377bff;
+    --text-shadow-sm: 0 0 0.5px #dcf44a, 0 0 8px #60f9f0, 0 5px 2px #377bff;
+}
+
+/* ── Hero ──────────────────────────────────────────────── */
+.hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+    background: var(--hero-bg);
+    overflow: hidden;
+    padding-top: 64px; /* fixed header height */
+}
+.hero-content {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 11%;
+    padding: 0 var(--spacing-lg);
+    z-index: 2;
+}
+.hero-text {
+    max-width: 600px;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+}
+.hero-title {
+    margin-bottom: var(--spacing-sm);
+    font-size: clamp(2rem, 3vw, 4rem);
+    font-weight: var(--font-weight-light);
+    line-height: 1.2;
+    color: #377BFF;
+}
+.hero-title .highlight {
+    display: block;
+    font-size: clamp(1.8rem, 3vw, 4rem);
+    font-style: italic;
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 3px;
+    color: var(--primary-yellow);
+    text-shadow: var(--text-shadow-glow);
+}
+.hero-description {
+    margin-bottom: var(--spacing-lg);
+    font-size: var(--font-size-xl);
+    line-height: 1.2;
+    color: var(--text-dark);
+    opacity: 0.9;
+}
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-dark);
+    background: var(--primary-yellow);
+    border: none;
+    border-radius: var(--border-radius-sm);
+    text-decoration: none;
+    box-shadow: var(--box-shadow-md);
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(212, 237, 48, 0.4);
+}
+.hero-image-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    transition: var(--transition-slow);
+}
+.hero-image {
+    position: absolute;
+    top: 50%;
+    right: -10%;
+    width: 60%;
+    max-width: 600px;
+    transform: translateY(-50%);
+    transition: var(--transition-slow);
+}
+.scroll-indicator {
+    position: absolute;
+    bottom: var(--spacing-lg);
+    left: var(--spacing-lg);
+    font-size: 1.3rem;
+    color: var(--primary-yellow);
+    text-shadow: var(--text-shadow-sm);
+    opacity: 1;
+    animation: bounce 2s infinite;
+}
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+}
+
+/* ── Servicios ─────────────────────────────────────────── */
+.services {
+    position: relative;
+    padding: var(--spacing-4xl) 0;
+    background: var(--primary-yellow);
+}
+.services-header {
+    margin: 0 15%;
+    margin-bottom: var(--spacing-2xl);
+    color: var(--primary-blue);
+}
+.services-title {
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: var(--font-weight-light);
+}
+.blue-highlight {
+    position: relative;
+    padding: 10px 12px;
+    background: var(--collab-bg);
+    border-radius: var(--border-radius-pill);
+    z-index: 1;
+}
+.services-subtitle {
+    margin: -3px 5.5%;
+    font-size: 2rem;
+    font-weight: var(--font-weight-light);
+}
+.yellow-highlight {
+    position: relative;
+    padding: 10px 12px;
+    font-weight: var(--font-weight-semibold);
+    color: var(--primary-yellow);
+    background: var(--blue-service);
+    border-radius: var(--border-radius-pill);
+    z-index: 0;
+}
+.services-description {
+    max-width: 700px;
+    margin: var(--spacing-lg) auto 0;
+    font-size: clamp(1rem, 2.5vw, 3rem);
+    line-height: 1.2;
+    color: var(--text-dark);
+}
+.services-grid {
+    display: grid;
+    gap: var(--spacing-xl);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+}
+.service-card {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    align-items: start;
+    gap: var(--spacing-lg);
+    padding: 0rem 15rem;
+    background: transparent;
+    transition: var(--transition-fast);
+}
+.service-card:hover { transform: translateY(-5px); }
+.service-icon img { width: 100px; height: auto; }
+.service-title {
+    margin-bottom: var(--spacing-sm);
+    font-size: clamp(1rem, 2vw, 2.2rem);
+    font-weight: var(--font-weight-light);
+    color: var(--text-dark);
+}
+.bold_title-service { font-weight: var(--font-weight-black); }
+.service-description {
+    margin-bottom: var(--spacing-md);
+    line-height: 1.6;
+    color: var(--text-dark);
+}
+.service-features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-xs) var(--spacing-lg);
+    max-width: 700px;
+    padding-bottom: 60px;
+    border-bottom: 2px solid var(--text-dark);
+}
+.service-feature {
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-normal);
+    color: var(--text-dark);
+}
+
+/* ── Portfolio ─────────────────────────────────────────── */
+.portfolio {
+    padding: var(--spacing-4xl) 0;
+    background: var(--primary-blue);
+}
+.portfolio-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+}
+.portfolio-title {
+    margin-bottom: var(--spacing-xl);
+    font-size: 2.5rem;
+    font-weight: var(--font-weight-light);
+    color: var(--white);
+}
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-lg);
+}
+.portfolio-item {
+    background: var(--white);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--box-shadow-lg);
+    overflow: hidden;
+    transition: var(--transition-fast);
+}
+.portfolio-item:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--box-shadow-xl);
+}
+.portfolio-image {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+}
+.portfolio-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition-fast);
+}
+.portfolio-item:hover .portfolio-image img { transform: scale(1.05); }
+.portfolio-content-item { padding: var(--spacing-md); }
+.portfolio-subtitle {
+    margin-bottom: var(--spacing-xs);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-dark);
+}
+.portfolio-description {
+    font-size: var(--font-size-base);
+    line-height: 1.5;
+    color: var(--text-light);
+}
+
+/* ── Colaboración ──────────────────────────────────────── */
+.collaboration {
+    position: relative;
+    padding: var(--spacing-4xl) 0;
+    background: var(--collab-bg);
+    overflow: hidden;
+}
+.collaboration::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    left: -100px;
+    width: 300px;
+    height: 300px;
+    background: var(--primary-yellow);
+    border-radius: 50%;
+    opacity: 0.3;
+}
+.collaboration-content {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+    z-index: 2;
+}
+.collab-image-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    transition: var(--transition-slow);
+}
+.collab-image {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    max-width: 600px;
+    transform: translateY(-50%);
+    transition: var(--transition-slow);
+}
+.collaboration-title {
+    margin-bottom: var(--spacing-lg);
+    font-size: clamp(2rem, 3vw, 2.5rem);
+    font-weight: var(--font-weight-light);
+    line-height: 1.2;
+    color: var(--text-dark);
+}
+.collab-items-container {
+    width: 50%;
+    margin-left: auto;
+    align-self: flex-end;
+}
+.collaboration-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+    padding: var(--spacing-lg) 6rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius-lg);
+    backdrop-filter: blur(10px);
+}
+.collaboration-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--white);
+    background: var(--primary-blue);
+    border-radius: var(--border-radius-md);
+    flex-shrink: 0;
+}
+.collaboration-text { line-height: 1.6; color: var(--text-dark); }
+
+/* ── Contacto ──────────────────────────────────────────── */
+.contact {
+    padding: var(--spacing-4xl) 0;
+    background: var(--primary-yellow);
+}
+.contact-content {
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+    text-align: center;
+}
+.contact-title {
+    margin-bottom: var(--spacing-sm);
+    font-size: clamp(4rem, 6vw, 7rem);
+    font-weight: var(--font-weight-light);
+    color: var(--text-dark);
+    align-self: flex-start;
+}
+.contact-description {
+    margin-bottom: var(--spacing-xl);
+    font-size: var(--font-size-lg);
+    color: var(--text-dark);
+}
+.contact-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-sm);
+    width: 100%;
+    max-width: 700px;
+    margin-bottom: var(--spacing-lg);
+    align-self: flex-end;
+}
+.form-group { display: flex; flex-direction: column; }
+.form-group.full-width { grid-column: 1 / -1; }
+.form-input,
+.form-select {
+    padding: var(--spacing-sm);
+    font-size: var(--font-size-sm);
+    color: var(--text-dark);
+    background: var(--white);
+    border: none;
+    box-shadow: var(--box-shadow-sm);
+    transition: var(--transition-fast);
+}
+.form-input:focus,
+.form-select:focus {
+    outline: none;
+    box-shadow: 0 2px 15px rgba(74, 144, 226, 0.3);
+}
+.form-button {
+    width: 100%;
+    max-width: 340px;
+    padding: var(--spacing-sm) var(--spacing-xl);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--white);
+    background: var(--primary-cyan);
+    border: none;
+    border-radius: var(--border-radius-sm);
+    box-shadow: var(--box-shadow-cyan);
+    cursor: pointer;
+    align-self: self-end;
+    transition: var(--transition-fast);
+}
+.form-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(0, 212, 184, 0.4);
+}
+
+/* ── Clientes ──────────────────────────────────────────── */
+.clients {
+    padding: var(--spacing-2xl) 0;
+    background: var(--white);
+}
+.clients-content {
+    display: flex;
+    flex-direction: row;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+}
+.client-title-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: var(--spacing-lg);
+}
+.clients-title {
+    margin-bottom: var(--spacing-sm);
+    font-size: clamp(1.5rem, 4vh, 3rem);
+    font-weight: var(--font-weight-light);
+    color: var(--text-dark);
+}
+.clients-subtitle {
+    margin-bottom: var(--spacing-sm);
+    font-size: clamp(1.5rem, 3vh, 3rem);
+    font-weight: var(--font-weight-bold);
+    color: var(--primary-blue);
+}
+.clients-logos {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: 0;
+}
+.client-logo { opacity: 0.7; transition: var(--transition-fast); }
+.client-logo:hover { transform: scale(1.1); opacity: 1; }
+
+/* ── Responsive ────────────────────────────────────────── */
+@media (max-width: 1200px) {
+    .services-grid { margin: 0 10%; padding: 0 1.5rem; }
+}
+@media (max-width: 1024px) {
+    .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 900px) {
+    .hero-image-container, .collab-image-container {
+        opacity: 0;
+        transform: translateY(50px) rotate(5deg);
+    }
+    .hero-image, .collab-image {
+        transform: translateY(-30%) scale(0.7);
+        filter: blur(8px) brightness(1.3);
+    }
+}
+@media (max-width: 768px) {
+    .hero-title { font-size: 2.5rem; }
+    .hero-description { font-size: var(--spacing-sm); }
+    .services-grid { grid-template-columns: 1fr; margin: 0 5%; padding: 0 var(--spacing-sm); gap: var(--spacing-lg); }
+    .service-card { grid-template-columns: 1fr; gap: var(--spacing-md); padding: var(--spacing-md); text-align: center; }
+    .portfolio-grid { grid-template-columns: 1fr; gap: var(--spacing-md); }
+    .portfolio-image { height: 200px; }
+    .collab-items-container { width: 100%; margin-left: 0; padding: 0 var(--spacing-sm); align-self: center; }
+    .collaboration-item { gap: var(--spacing-md); margin-bottom: var(--spacing-lg); padding: var(--spacing-md) var(--spacing-lg); }
+    .collaboration-logo { width: 60px; height: 60px; font-size: var(--font-size-xl); }
+    .collaboration-text { font-size: var(--font-size-md); text-align: justify; }
+    .contact-form { grid-template-columns: 1fr; }
+    .clients-content { flex-direction: column; align-items: center; text-align: center; }
+    .client-title-content { align-items: center; text-align: center; }
+    .clients-logos { margin: 0 auto; justify-content: center; gap: var(--spacing-lg); }
+}
+@media (max-width: 480px) {
+    .services-grid { margin: 0; padding: 0 var(--spacing-sm); gap: var(--spacing-md); }
+    .service-card { padding: var(--spacing-sm); gap: var(--spacing-sm); }
+}
+</style>
+
+
+<!-- ══════════════════════════════════════════════════════
+     HERO
+     data-hero-title / data-hero-subtitle / data-hero-cta → hero timeline
+     data-hero-image → parallax / reveal custom
+     ═══════════════════════════════════════════════════ -->
+<section id="inicio" data-section="hero" class="hero">
+
+    <div data-hero-image class="hero-image-container">
+        <img
+            src="/assets/media/hero-image.png"
+            alt="176lab hero"
+            class="hero-image"
+            loading="eager"
+        >
+    </div>
+
+    <div class="hero-content">
+        <div class="hero-text">
+            <h1 data-hero-title class="hero-title invisible">
+                EXPLORA EL FUTURO DE
+                <span class="highlight">LA PROGRAMACIÓN</span>
+            </h1>
+            <p data-hero-subtitle class="hero-description invisible">
+                Combinamos la creatividad y la tecnología para crear soluciones personalizadas que impulsan el crecimiento de tu negocio.
+            </p>
+            <a data-hero-cta href="/contact" class="cta-button invisible">
+                Contáctanos
+                <span>→</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="scroll-indicator">Scroll down</div>
+
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SERVICIOS
+     data-services-header → stagger children
+     data-service-card + data-index → stagger cards
+     data-service-icon / data-service-content → sub-elementos
+     ═══════════════════════════════════════════════════ -->
+<section id="estudios" data-section="services" class="services">
+
+    <div data-services-header class="services-header">
+        <h2 data-animate class="services-title invisible">
+            SOLUCIONES
+            <span class="blue-highlight">PERSONALIZADAS</span>
+        </h2>
+        <h3 data-animate data-animate-delay="0.05" class="services-subtitle invisible">
+            PARA TU
+            <span class="yellow-highlight">NEGOCIO</span>
+        </h3>
+        <p data-animate data-animate-delay="0.1" class="services-description invisible">
+            Nuestros estudios de diseño, marketing y programación están formados por expertos en cada área, listos para ayudarte a alcanzar tus metas en el mundo digital.
+        </p>
+    </div>
+
+    <div class="services-grid">
+
+        <div data-service-card data-index="0" data-animate data-animate-delay="0.0" class="service-card invisible">
+            <div data-service-icon class="service-icon">
+                <img src="/assets/icon/design-studio.png" alt="Design Studio" loading="lazy">
+            </div>
+            <div data-service-content>
+                <h3 class="service-title"><span class="bold_title-service">Design</span> Studio</h3>
+                <p class="service-description">
+                    En nuestro estudio de diseño, combinamos creatividad y tecnología para crear soluciones
+                    personalizadas en User Experience, Visual Design, Service Design, Branding, Animation e Illustration.
+                    Ayudamos a nuestros clientes a destacar en el mercado y alcanzar sus objetivos en el mundo digital.
+                </p>
+                <h5>Áreas de expertise</h5>
+                <div class="service-features">
+                    <span class="service-feature">User experience</span>
+                    <span class="service-feature">Visual design</span>
+                    <span class="service-feature">Service design</span>
+                    <span class="service-feature">Branding</span>
+                    <span class="service-feature">Animation</span>
+                    <span class="service-feature">Illustration</span>
+                </div>
+            </div>
+        </div>
+
+        <div data-service-card data-index="1" data-animate data-animate-delay="0.1" class="service-card invisible">
+            <div data-service-icon class="service-icon">
+                <img src="/assets/icon/digital-marketing.png" alt="Digital Marketing" loading="lazy">
+            </div>
+            <div data-service-content>
+                <h3 class="service-title">Digital <span class="bold_title-service">Marketing</span></h3>
+                <p class="service-description">
+                    En nuestro estudio de digital marketing, creamos soluciones personalizadas en
+                    Marketing Strategy, Content Planner, Social Media y Events. Ayudamos a nuestros
+                    clientes a alcanzar sus objetivos de marketing en el mundo digital.
+                </p>
+                <h5>Áreas de expertise</h5>
+                <div class="service-features">
+                    <span class="service-feature">Marketing strategy</span>
+                    <span class="service-feature">Content Planner</span>
+                    <span class="service-feature">Social Media</span>
+                    <span class="service-feature">Events</span>
+                </div>
+            </div>
+        </div>
+
+        <div data-service-card data-index="2" data-animate data-animate-delay="0.2" class="service-card invisible">
+            <div data-service-icon class="service-icon">
+                <img src="/assets/icon/ui-engineering.png" alt="UI Engineering" loading="lazy">
+            </div>
+            <div data-service-content>
+                <h3 class="service-title">UI<span class="bold_title-service"> Engineering</span></h3>
+                <p class="service-description">
+                    En nuestro estudio de ingeniería UI, creamos soluciones personalizadas en Aplicaciones,
+                    Front-end, Back-end, Support, Infrastructure, Cloud y Consultancy.
+                    Ayudamos a nuestros clientes a desarrollar productos digitales de alta calidad y eficiencia.
+                </p>
+                <h5>Áreas de expertise</h5>
+                <div class="service-features">
+                    <span class="service-feature">Aplicaciones</span>
+                    <span class="service-feature">Front-end / Back-end</span>
+                    <span class="service-feature">Support</span>
+                    <span class="service-feature">Infrastructure</span>
+                    <span class="service-feature">Cloud</span>
+                    <span class="service-feature">Consultancy</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════
+     PORTFOLIO
+     data-portfolio-title → entrada título
+     data-portfolio-item + data-index → stagger cards
+     data-portfolio-image → scale reveal interno
+     ═══════════════════════════════════════════════════ -->
+<section id="casos" data-section="portfolio" class="portfolio">
+    <div class="portfolio-content">
+
+        <h2 data-portfolio-title data-animate class="portfolio-title invisible">
+            CASOS DE ÉXITO
+        </h2>
+
+        <div class="portfolio-grid">
+
+            <div data-portfolio-item data-index="0" data-animate data-animate-delay="0.0" class="portfolio-item invisible">
+                <div data-portfolio-image class="portfolio-image">
+                    <img src="/assets/media/portfolio-img1.png" alt="Caso de estudio 1" loading="lazy">
+                </div>
+                <div class="portfolio-content-item">
+                    <h3 class="portfolio-subtitle">Why is it important?</h3>
+                    <p class="portfolio-description">
+                        It helps prevent the customer from having a negative user experience by establishing the game rules of the product's user interface.
+                    </p>
+                </div>
+            </div>
+
+            <div data-portfolio-item data-index="1" data-animate data-animate-delay="0.1" class="portfolio-item invisible">
+                <div data-portfolio-image class="portfolio-image">
+                    <img src="/assets/media/portfolio-img2.png" alt="Caso de estudio 2" loading="lazy">
+                </div>
+                <div class="portfolio-content-item">
+                    <h3 class="portfolio-subtitle">Why is it important?</h3>
+                    <p class="portfolio-description">
+                        It helps prevent the customer from having a negative user experience by establishing the game rules of the product's user interface.
+                    </p>
+                </div>
+            </div>
+
+            <div data-portfolio-item data-index="2" data-animate data-animate-delay="0.2" class="portfolio-item invisible">
+                <div data-portfolio-image class="portfolio-image">
+                    <img src="/assets/media/portfolio-img3.png" alt="Caso de estudio 3" loading="lazy">
+                </div>
+                <div class="portfolio-content-item">
+                    <h3 class="portfolio-subtitle">Why is it important?</h3>
+                    <p class="portfolio-description">
+                        It helps prevent the customer from having a negative user experience by establishing the game rules of the product's user interface.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════
+     COLABORACIÓN
+     data-collab-image → slide desde la izquierda
+     data-collab-title → entrada título
+     data-collab-item + data-index → stagger items
+     data-collab-logo → reveal logo
+     ═══════════════════════════════════════════════════ -->
+<section id="collab" data-section="collab" class="collaboration">
+
+    <div data-collab-image class="collab-image-container">
+        <img
+            src="/assets/media/collab-image.png"
+            alt="176lab colaboración"
+            class="collab-image"
+            loading="lazy"
+        >
+    </div>
+
+    <div class="collaboration-content">
+
+        <h2 data-collab-title data-animate class="collaboration-title invisible">
+            COLABORACIONES<br>
+            QUE IMPULSAN<br>
+            TU MARCA
+        </h2>
+
+        <div class="collab-items-container">
+
+            <div data-collab-item data-index="0" data-animate data-animate-delay="0.1" class="collaboration-item invisible">
+                <div data-collab-logo class="collaboration-logo">
+                    <img src="/assets/media/logo-176lab.png" alt="176lab" style="width:60px;height:auto;object-fit:contain;">
+                </div>
+                <p class="collaboration-text">
+                    <strong>176 lab</strong> _ Nuestro partner de desarrollo y asesoría es un equipo de expertos en tecnología. Al igual que las estrellas en el cielo, su enfoque en la innovación y la colaboración nos permite trabajar juntos de manera efectiva para lograr los objetivos de nuestros clientes.
+                </p>
+            </div>
+
+            <div data-collab-item data-index="1" data-animate data-animate-delay="0.2" class="collaboration-item invisible">
+                <div data-collab-logo class="collaboration-logo">
+                    <img src="/assets/media/logo-176lab.png" alt="176lab" style="width:60px;height:auto;object-fit:contain;">
+                </div>
+                <p class="collaboration-text">
+                    <strong>176 lab</strong> _ Nuestro partner de desarrollo y asesoría es un equipo de expertos en tecnología. Al igual que las estrellas en el cielo, su enfoque en la innovación y la colaboración nos permite trabajar juntos de manera efectiva para lograr los objetivos de nuestros clientes.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════
+     CONTACTO
+     data-contact-title → entrada título grande
+     data-contact-desc  → entrada descripción
+     data-contact-form  → entrada formulario
+     data-contact-btn   → entrada botón
+     ═══════════════════════════════════════════════════ -->
+<section id="contacto" data-section="contact" class="contact">
+    <div class="contact-content">
+
+        <h2 data-contact-title data-animate class="contact-title invisible">Hablemos</h2>
+
+        <p data-contact-desc data-animate data-animate-delay="0.08" class="contact-description invisible">
+            ¿Quieres saber más sobre nuestros servicios?<br>
+            <span style="font-weight: bold;">¡Hablemos!</span> Estamos ansiosos por escucharte.
+        </p>
+
+        <form data-contact-form data-animate data-animate-delay="0.16" class="contact-form invisible" id="home-contact-form">
+            <div class="form-group">
+                <input type="text" class="form-input" placeholder="Nombre" required>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-input" placeholder="Apellido" required>
+            </div>
+            <div class="form-group">
+                <input type="email" class="form-input" placeholder="E-mail" required>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-input" placeholder="País" required>
+            </div>
+            <div class="form-group full-width">
+                <select class="form-select" required>
+                    <option value="">¿Qué necesitas?</option>
+                    <option value="web-design">Diseño Web</option>
+                    <option value="digital-marketing">Marketing Digital</option>
+                    <option value="development">Desarrollo</option>
+                    <option value="consultation">Consultoría</option>
+                </select>
+            </div>
+        </form>
+
+        <button
+            type="button"
+            data-contact-btn
+            data-animate
+            data-animate-delay="0.24"
+            class="form-button invisible"
+            onclick="submitHomeForm(this)"
+        >
+            Siguiente
+        </button>
+
+    </div>
+</section>
+
+<script>
+function submitHomeForm(btn) {
+    const form = document.getElementById('home-contact-form')
+    const inputs = form.querySelectorAll('input[required], select[required]')
+    let valid = true
+    inputs.forEach(el => {
+        if (!el.value.trim()) { el.style.boxShadow = '0 2px 15px rgba(239,68,68,0.4)'; valid = false }
+        else el.style.boxShadow = ''
+    })
+    if (!valid) return
+    btn.disabled = true
+    btn.textContent = 'Enviando...'
+    setTimeout(() => {
+        form.reset()
+        btn.textContent = '¡Enviado!'
+        btn.style.background = '#22C55E'
+        setTimeout(() => { btn.textContent = 'Siguiente'; btn.disabled = false; btn.style.background = '' }, 2500)
+    }, 1200)
+}
+</script>
+
+
+<!-- ══════════════════════════════════════════════════════
+     CLIENTES
+     data-clients-title → entrada bloque título
+     data-client-logo + data-index → stagger logos
+     ═══════════════════════════════════════════════════ -->
+<section id="clientes" data-section="clients" class="clients">
+    <div class="clients-content">
+
+        <div data-clients-title data-animate class="client-title-content invisible">
+            <h2 class="clients-title">CLIENTES QUE</h2>
+            <p class="clients-subtitle">CONFÍAN EN <br>NOSOTROS</p>
+        </div>
+
+        <div class="clients-logos">
+            <div data-client-logo data-index="0" data-animate data-animate-delay="0.1" class="client-logo invisible">
+                <img src="/assets/media/bci.png" alt="BCI" loading="lazy">
+            </div>
+            <div data-client-logo data-index="1" data-animate data-animate-delay="0.2" class="client-logo invisible">
+                <img src="/assets/media/bco-financiero.png" alt="Banco Financiero" loading="lazy">
+            </div>
+            <div data-client-logo data-index="2" data-animate data-animate-delay="0.3" class="client-logo invisible">
+                <img src="/assets/media/bbva.png" alt="BBVA" loading="lazy">
+            </div>
+        </div>
+
+    </div>
+</section>

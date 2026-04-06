@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="176lab — Agencia de sitios web animados para marcas con identidad propia." />
+    <title>176lab — Sitios animados para marcas</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <script type="module" src="/main.js"></script>
+  </head>
+  <body class="bg-gray-950 font-sans antialiased overflow-x-hidden">
+
+    <!-- ── HEADER ─────────────────────────────────────────── -->
+    <header class="header" id="site-header">
+      <nav class="nav">
+
+        <a href="/" class="logo" aria-label="176lab — Inicio">
+          <img src="/assets/media/logo.png" alt="176lab" />
+        </a>
+
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="#inicio" class="nav-link" data-nav-link>Inicio</a></li>
+          <li><a href="#estudios" class="nav-link" data-nav-link>Estudios</a></li>
+          <li><a href="#casos" class="nav-link" data-nav-link>Casos de estudio</a></li>
+          <li><a href="#collab" class="nav-link" data-nav-link>Colaboraciones</a></li>
+          <li><a href="#contacto" class="nav-link" data-nav-link>Contacto</a></li>
+          <li><a href="#clientes" class="nav-link" data-nav-link>Clientes</a></li>
+          <li>
+            <select style="background:#4a91e2;border:none;color:#d0ee09;font-weight:500;border-radius:5px;padding:2px 6px;cursor:pointer;" aria-label="Idioma">
+              <option value="es">ES</option>
+              <option value="en">EN</option>
+            </select>
+          </li>
+        </ul>
+
+        <button class="menu-toggle" id="mobile-menu-btn" aria-label="Abrir menú">☰</button>
+
+      </nav>
+    </header>
+
+    <!-- ── MAIN CONTENT — router injects here ────────────── -->
+    <main id="app" role="main"></main>
+
+    <!-- ── FOOTER ─────────────────────────────────────────── -->
+    <footer class="footer">
+      <div class="footer-content">
+        <p class="footer-text">© 2024 176lab. Todos los derechos reservados.</p>
+        <div class="footer-logo">
+          <img src="/assets/media/logo.png" alt="logo-176lab" style="height:36px;width:auto;" />
+        </div>
+      </div>
+    </footer>
+
+  </body>
+</html>

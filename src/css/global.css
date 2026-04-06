@@ -1,0 +1,248 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', system-ui, sans-serif;
+  /* app accent */
+  --color-accent: #6366f1;
+  --color-accent-alt: #8b5cf6;
+  /* 176lab brand */
+  --color-brand-teal: #00EBB2;
+  --color-brand-yellow: #D4ED30;
+  --color-brand-blue: #4A90E2;
+  --color-brand-blue-dark: #2C91F0;
+  --color-brand-hero-blue: #377BFF;
+  --color-brand-text: #2D3748;
+  --color-brand-text-muted: #718096;
+}
+
+/* ─── Base ─────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: auto; /* Lenis handles smooth scroll */
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #fff;
+  color: #111;
+  overflow-x: hidden;
+}
+
+/* ─── GPU acceleration helpers ─────────────────────────── */
+[data-animate],
+[data-parallax],
+[data-hover] {
+  will-change: transform, opacity;
+}
+
+/* ─── Scroll indicator ──────────────────────────────────── */
+.scroll-indicator {
+  transition: opacity 0.4s ease;
+}
+.scroll-indicator.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ─── Lazy images ───────────────────────────────────────── */
+img[loading="lazy"] {
+  transition: opacity 0.4s ease;
+}
+img[loading="lazy"]:not([src]) {
+  opacity: 0;
+}
+
+/* ─── App container (GSAP controls visibility) ──────────── */
+#app {
+  opacity: 0;
+  min-height: calc(100vh - 64px);
+}
+
+/* ─── Nav active state ──────────────────────────────────── */
+[data-nav-link][aria-current="page"] {
+  color: white !important;
+  opacity: 1 !important;
+}
+
+/* ─── Header brand (original design) ───────────────────── */
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 1rem 0;
+  background: #00EBB2;
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+.header.scrolled {
+  box-shadow: 0 2px 20px rgba(0, 212, 184, 0.2);
+}
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+.logo {
+  display: block;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+.logo:hover { transform: scale(1.05); }
+.logo img { height: 40px; width: auto; display: block; }
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+}
+.nav-link {
+  position: relative;
+  color: #4A90E2;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+.nav-link:hover { color: #D4ED30; }
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #D4ED30;
+  transition: width 0.3s ease;
+}
+.nav-link:hover::after { width: 100%; }
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
+}
+@media (max-width: 768px) {
+  .menu-toggle { display: block; }
+  .nav-menu {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    width: 100%;
+    background: #00EBB2;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 2rem;
+    gap: 1.5rem;
+    transform: translateY(-120%);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 999;
+  }
+  .nav-menu.active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/* ─── Footer brand (original design) ───────────────────── */
+.footer {
+  padding: 5rem;
+  background: #00D4B8;
+}
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+.footer-text {
+  color: #4A90E2;
+  opacity: 0.8;
+}
+@media (max-width: 768px) {
+  .footer { padding: 3rem 2rem; }
+  .footer-content { flex-direction: column-reverse; gap: 1rem; text-align: center; }
+}
+
+/* ─── 176lab brand helpers ──────────────────────────────── */
+/* Glowing text used on hero highlight and scroll indicator  */
+.brand-glow {
+  text-shadow:
+    0 0 4px #dcf44a,
+    0 0 8px #60f9f0,
+    0 5px 2px #377bff;
+}
+.brand-glow-sm {
+  text-shadow:
+    0 0 0.5px #dcf44a,
+    0 0 8px #60f9f0,
+    0 5px 2px #377bff;
+}
+
+@keyframes brand-bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40%  { transform: translateY(-10px); }
+  60%  { transform: translateY(-5px); }
+}
+.brand-bounce { animation: brand-bounce 2s infinite; }
+
+/* Fluid font sizes (used via class instead of inline style) */
+.text-size-hero    { font-size: clamp(2.5rem, 3vw,   4rem);   line-height: 1.2; }
+.text-size-section { font-size: clamp(1.6rem, 2vw,   2rem);   line-height: 1.2; }
+.text-size-service { font-size: clamp(1rem,   2vw,   2.2rem); }
+.text-size-contact { font-size: clamp(4rem,   6vw,   7rem);   line-height: 1;   }
+.text-size-desc    { font-size: clamp(1rem,   2.5vw, 1.5rem); line-height: 1.4; }
+
+/* Service card: large horizontal padding on wide screens */
+[data-service-card] { padding-left: 2rem; padding-right: 2rem; }
+@media (min-width: 1024px) { [data-service-card] { padding-left: 6rem;  padding-right: 6rem;  } }
+@media (min-width: 1280px) { [data-service-card] { padding-left: 15rem; padding-right: 15rem; } }
+
+/* Service features divider */
+[data-service-features] {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem 2rem;
+  max-width: 700px;
+  padding-bottom: 60px;
+  border-bottom: 2px solid var(--color-brand-text);
+}
+
+/* ─── Form inputs ───────────────────────────────────────── */
+.field {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 0.875rem 0;
+  color: white;
+  font-size: 1rem;
+  font-family: var(--font-sans);
+  outline: none;
+  transition: border-color 0.2s ease;
+  resize: none;
+}
+
+.field::placeholder {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.field:focus {
+  border-color: var(--color-accent);
+}
